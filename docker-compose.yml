@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  daily-menu:
+    build: .
+    container_name: daily-menu
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      # Persist visit history locally
+      - ./visit_history.json:/app/visit_history.json
+      # Persist restaurant data
+      - ./data.tsv:/app/data.tsv
+    restart: unless-stopped
